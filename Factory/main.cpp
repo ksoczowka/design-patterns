@@ -20,5 +20,20 @@ int main() {
 
     std::cout << prod->info() << '\n';
 
+    version = 'B';
+
+    if (version == 'A') {
+        creator = std::make_shared<CreatorProductA>(CreatorProductA());
+    } else if (version == 'B') {
+        creator = std::make_shared<CreatorProductB>(CreatorProductB());
+    } else {
+        std::cerr << "No.\n";
+        return 1;
+    }
+
+    prod = creator->makeProduct();
+
+    std::cout << prod->info() << '\n';
+
     return 0;
 }
