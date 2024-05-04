@@ -7,7 +7,7 @@ class Product {
  public:
     Product(){}
 
-    virtual std::string info() { return ""; };
+    virtual std::string info() = 0;
 };
 
 class NewProductA : public Product {
@@ -32,7 +32,7 @@ class Creator {
  public:
     Creator() {}
 
-    virtual std::shared_ptr<Product> makeProduct()  { return nullptr; };
+    virtual std::shared_ptr<Product> makeProduct() = 0;
 };
 
 class CreatorProductA : public Creator {
