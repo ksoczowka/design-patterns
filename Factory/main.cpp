@@ -5,11 +5,13 @@
 int main() {
     std::shared_ptr<Creator> creator = nullptr;
 
-    char version = 'A';
+    char version = ' ';
+    std::cout << "Please choose version of Creator to use [A/B]: ";
+    std::cin >> version;
 
-    if (version == 'A') {
+    if (version == 'A' || version == 'a') {
         creator = std::make_shared<CreatorProductA>(CreatorProductA());
-    } else if (version == 'B') {
+    } else if (version == 'B' || version == 'b') {
         creator = std::make_shared<CreatorProductB>(CreatorProductB());
     } else {
         std::cerr << "No.\n";
@@ -17,21 +19,6 @@ int main() {
     }
 
     std::shared_ptr<Product> prod = creator->makeProduct();
-
-    std::cout << prod->info() << '\n';
-
-    version = 'B';
-
-    if (version == 'A') {
-        creator = std::make_shared<CreatorProductA>(CreatorProductA());
-    } else if (version == 'B') {
-        creator = std::make_shared<CreatorProductB>(CreatorProductB());
-    } else {
-        std::cerr << "No.\n";
-        return 1;
-    }
-
-    prod = creator->makeProduct();
 
     std::cout << prod->info() << '\n';
 
