@@ -7,9 +7,7 @@ class Implementation {
  public:
     Implementation() {}
 
-    std::string getVersion() const { 
-        return "Implementation()"; 
-    }
+    virtual std::string getVersion() const = 0;
 };
 
 class NewImplementationA : public Implementation {
@@ -31,7 +29,6 @@ class Abstraction {
     Abstraction() {
         implementation_ = nullptr;
     }
-    Abstraction(std::shared_ptr<Implementation> Implementation) : implementation_(Implementation) {}
     std::string info() const {
         return "Abstraction()";
     }
