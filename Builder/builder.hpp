@@ -6,8 +6,8 @@
 
 class Product {
  public:
-    virtual std::string info() = 0;
-    std::string to_string() {
+    virtual std::string info() const = 0;
+    std::string to_string() const {
         std::string result = "";
         for (auto part : parts) {
             result += part;
@@ -19,14 +19,14 @@ class Product {
 
 class ProductA : public Product {
  public:
-    std::string info() override {
+    std::string info() const override {
         return "Upper case letters";
     }
 };
 
 class ProductB : public Product {
  public:
-    std::string info() override {
+    std::string info() const override {
         return "Lower case letters";
     }
 };
@@ -39,7 +39,7 @@ class Builder {
     virtual void addB() = 0;
     virtual void addC() = 0;
 
-    virtual std::shared_ptr<Product> getProduct() = 0;
+    virtual std::shared_ptr<Product> getProduct() const = 0;
 };
 
 class NewBuilderA : public Builder {
@@ -55,7 +55,7 @@ class NewBuilderA : public Builder {
         product_.parts.push_back('C');
     }
 
-    std::shared_ptr<Product> getProduct() override { return std::make_shared<ProductA>(product_); }
+    std::shared_ptr<Product> getProduct() const override { return std::make_shared<ProductA>(product_); }
 
     void reset() override {
         product_ = ProductA();
@@ -77,7 +77,7 @@ class NewBuilderB : public Builder {
         product_.parts.push_back('c');
     }
 
-    std::shared_ptr<Product> getProduct() override { return std::make_shared<ProductB>(product_); }
+    std::shared_ptr<Product> getProduct() const override { return std::make_shared<ProductB>(product_); }
 
     void reset() override {
         product_ = ProductB();
@@ -107,6 +107,7 @@ class Director {
             builder_->addA();
             builder_->addB();
             builder_->addC();
+            
             return builder_->getProduct();
         }
         return nullptr;
